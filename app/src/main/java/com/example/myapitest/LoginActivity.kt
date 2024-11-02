@@ -1,5 +1,7 @@
 package com.example.myapitest
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -119,7 +121,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun verifyLoggedUser() {
-        if (auth.currentUser != null && false) {
+        if (auth.currentUser != null) {
             navigateToMainActivity()
         }
     }
@@ -127,6 +129,10 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToMainActivity() {
         startActivity(MainActivity.newIntent(this))
         finish()
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
 
 
