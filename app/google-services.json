@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "462277847345",
+    "project_id": "trabalho-api-utfpr",
+    "storage_bucket": "trabalho-api-utfpr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462277847345:android:f84cefcf12be9e321aa810",
+        "android_client_info": {
+          "package_name": "com.example.myapitest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7-gJhjQqINvy_j5-N85IjcnSQ4TWaxGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

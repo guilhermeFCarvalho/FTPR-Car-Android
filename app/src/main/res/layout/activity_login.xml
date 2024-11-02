@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/et_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Digite o número de telefone"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/btn_send_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="enviar código " />
+
+    <EditText
+        android:id="@+id/et_verification_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Digite o código de verificação"
+        android:inputType="number"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:id="@+id/btn_verify_code_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Verificar Código"
+        android:visibility="invisible"
+        />
+</LinearLayout>
