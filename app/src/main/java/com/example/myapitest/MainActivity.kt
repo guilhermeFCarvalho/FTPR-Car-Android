@@ -1,13 +1,22 @@
 package com.example.myapitest
 
+import CarAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.minhaprimeiraapi.service.RetrofitClient
+import com.example.minhaprimeiraapi.service.RetrofitClient.safeApiCall
 import com.example.myapitest.databinding.ActivityMainBinding
+import com.example.myapitest.model.CarDetails
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +50,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        // TODO
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = true
+            fetchItems()
+        }
+        binding.addCta.setOnClickListener {
+            startActivity(CarDetailsActivity.newIntent(this, ""))
+        }
     }
 
     private fun requestLocationPermission() {
@@ -49,7 +65,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchItems() {
-        // TODO
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall { RetrofitClient.apiService.getCars() }
+            withContext(Dispatchers.Main) {
+                binding.swipeRefreshLayout.isRefreshing = false
+                when (result) {
+                    is RetrofitClient.Result.Error -> {}
+                    is RetrofitClient.Result.Success -> handleOnSuccess(result.data)
+                }
+            }
+        }
+    }
+
+    private fun handleOnSuccess(data: List<CarDetails>) {
+        val adapter = CarAdapter(data) {
+            startActivity(
+                CarDetailsActivity.newIntent(
+                    this,
+                    it.id
+                )
+            )
+        }
+        binding.recyclerView.adapter = adapter
     }
 
     companion object {
